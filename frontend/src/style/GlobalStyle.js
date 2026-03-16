@@ -25,8 +25,4 @@ export const GlobalStyle = createGlobalStyle`
   outline: 0;
   box-sizing: border-box;
  }
-
- body {
-  // background: ${({ theme }) => theme.colors.Dark.dark400};
- } 
 `

@@ -1,6 +1,8 @@
-function Products () {
-    retunr (
-
+function Products ({ id }) {
+    return (
+     <>
+      
+     </>
     )
 }
 
