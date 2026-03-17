@@ -1,16 +1,12 @@
-import { Home } from '../pages/Home';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import { Products } from '../pages/Products';
-import Pagina_404 from '../pages/Pagina_404';
+import { BrowserRouter } from 'react-router-dom';
+import { UserRoutes } from './user.routes';
+import { AuthRoutes } from './auth.routes';
 
-export function HomeRouter() {
+export function Router() {
+  const user = true
   return (
     <BrowserRouter>
-     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/product/:id' element={<Products />} />
-      <Route path="*" element={<Pagina_404 />} />
-    </Routes>
+     { user ? <UserRoutes/> : <AuthRoutes/> }
     </BrowserRouter>
-  );
+  )
 }

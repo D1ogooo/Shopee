@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -58,7 +59,7 @@ export const Card = styled.div`
   }
 `
 
-export const Button = styled.button`
+export const ButtonProduct = styled(Link)`
   background-color: #f57224;
   color: white;
   border: none;
@@ -66,6 +67,8 @@ export const Button = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  text-decoration: none;
+
  :hover {
   background-color: #e0601b;
  }

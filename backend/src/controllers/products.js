@@ -33,7 +33,7 @@ class ProductsController {
     }
 
     delete() {
-
+     
     }
 
     show() {
