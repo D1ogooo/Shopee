@@ -23,8 +23,9 @@ class AuthController {
       }
 
       const token = jwt.sign({ id: findEmail.id }, secret, { expiresIn: "1d" }) 
+      const user = User.findOne({ email }).select('-password').exec()
 
-      res.status(200).json({ "sucesso!": token })
+      res.status(200).json({ "sucesso!": token, user, message: "succes" })
     }
 
     async signup() {

@@ -7,7 +7,8 @@ export const Container = styled.div`
 `
 
 export const Title = styled.h2`
- width: 15rem;
+ font-family: 'Roboto';
+ width: 17rem;
  height: 30px;
  color: #000;
  margin: 0 auto;
