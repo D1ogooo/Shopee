@@ -4,12 +4,8 @@ dotenv.config();
 
 async function conn() {
   try {
-    const DBUSER = process.env.DB_USER;
-    const DBPASSWORD = process.env.DB_PASSWORD;
+    await mongoose.connect('mongodb://127.0.0.1:27017/shopeeteste');
 
-    await mongoose.connect(
-      `mongodb+srv://${DBUSER}:${DBPASSWORD}@shopeeteste.fiswrmd.mongodb.net/?appName=Shopeeteste`
-    );
     console.log('Database connected successfully');
   } catch (error) {
     console.error('Database connection error:', error);

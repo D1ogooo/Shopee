@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { api } from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({});
 
@@ -24,13 +25,12 @@ function AuthProvider({ children }) {
       });
 
       const { user, token } = res.data;
-
-      localStorage.setItem('@Shopee:token', token);
-      localStorage.setItem('@Shopee:user', JSON.stringify(user));
-
       api.defaults.headers.authorization = `Bearer ${token}`;
-      setData({ user, token });
+       
+      localStorage.setItem('@Shopee:user', JSON.stringify(user));
+      localStorage.setItem('@Shopee:token', token);
 
+      setData({ user, token });
       return res.data;
     } catch (error) {
       throw new Error(error.response?.data?.message || "Erro ao fazer login");
@@ -54,8 +54,15 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function loggout() {
+   localStorage.removeItem('@Shopee:token');
+   localStorage.removeItem('@Shopee:user');
+   api.defaults.headers.authorization = "";
+	 setData({});
+  }
+
   return (
-    <AuthContext.Provider value={{ signin, signup, data }}>
+    <AuthContext.Provider value={{ signin, signup, data, loggout }}>
       {children}
     </AuthContext.Provider>
   );

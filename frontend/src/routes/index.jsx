@@ -9,7 +9,7 @@ export function Router() {
 
   return (
     <BrowserRouter>
-     { data.user ? <UserRoutes/> : <AuthRoutes/> }
+     { data.token ? <UserRoutes/> : <AuthRoutes/> }
     </BrowserRouter>
   )
 }

@@ -1,9 +1,8 @@
 const express = require('express');
-const path = require('path');
 const cors = require('cors')
 
 const app = express();
-const conn = require('./config/databaseConfig');
+const conn = require('./config/database');
 const router = require('./routes');
 
 app.use(express.json());

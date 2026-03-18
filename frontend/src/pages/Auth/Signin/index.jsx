@@ -2,9 +2,11 @@ import { Container, Card, Title, Form, InputWrapper, SubmitButton, BottomLink, B
 import { AuthContext } from "../../../contexts/AuthContext.jsx";
 import { useState, useContext } from 'react'
 import { Eye, EyeOff } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 function Signin() {
   const { signin } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
@@ -14,11 +16,11 @@ function Signin() {
     e.preventDefault();
 
     try {
-      await signin(email, password)
-      .then((e) => {
+     await signin(email, password)
+     .then((e) => {
 	   alert(e.message || "Usuário authenticado com sucesso!");
 	   navigate("/");
-	  })
+	   })
     } catch (err) {
       console.error("Erro ao logar:", err.message);
       alert(err.message);

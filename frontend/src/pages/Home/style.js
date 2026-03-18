@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Container = styled.div`
- width: 90%;
+//  width: 90%;
  margin: 0 auto;
 `
 
@@ -28,11 +28,11 @@ export const CardPai = styled.div`
 `
 
 export const Card = styled.div`
-  width: 350px;
+  width: 21.875rem;
   padding: 1rem;
   gap: 1rem;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: .5rem;
   overflow: hidden;
   font-family: Arial, sans-serif;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -49,6 +49,8 @@ export const Card = styled.div`
 
   h3 {
    span {
+    padding-left: .1875rem;
+    padding-right: .1875rem;
     background-color: #f57224;
     font-family: "Arial" sans-serif ;
    }

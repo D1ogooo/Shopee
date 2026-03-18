@@ -1,57 +1,63 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const Product = require("../model/productsModel");
 
 class ProductsController {
-    create() {
-     const { image, titulo, conteudo, valor } = req.body
 
-      const authHeader = req.headers['authorization'];
-      const token = authHeader && authHeader.split(' ')[1];
-      const secret = process.env.SECRET_KEY;
+  async create(req, res) {
+    const { image, titulo, conteudo, valor } = req.body;
 
-     if (!token) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) {
       return res.status(401).json({ message: 'Não autorizado' });
-     }
-
-     const decoded = jwt.verify(token, secret);
-     const userId = decoded.id;
-
-     if (!token) {
-      return res.status(401).json({ message: 'Não autorizado' });
-     }
-     
-     const newProduct = new Product({
-        image,
-        titulo,
-        conteudo,
-        valor,
-        user: userId
-     })
-     
-     res.status(201).json({ "sucesso!": newProduct });
     }
 
-    delete() {
-     
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
+    const newProduct = new Product({
+      image,
+      titulo,
+      conteudo,
+      valor,
+      user: decoded.id
+    });
+
+    await newProduct.save();
+
+    res.status(201).json(newProduct);
+  }
+
+  async delete(req, res) {
+    const { id } = req.params;
+
+    const product = await Product.findById(id);
+    if (!product) {
+      return res.status(404).json({ message: "Produto não encontrado" });
     }
 
-    show() {
-     
+    await Product.findByIdAndDelete(id);
+
+    res.status(200).json({ message: "Produto deletado" });
+  }
+
+  async show(req, res) {
+    const products = await Product.find();
+    res.status(200).json(products);
+  }
+
+  async find(req, res) {
+    const { id } = req.params;
+
+    const product = await Product.findById(id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Produto não encontrado" });
     }
 
-    find() {
-     const { id } = req.params;
-     
-     const verifyProduct = Product.findOne({ id })
-
-     if(!verifyProduct) {
-      res.status(400).json({ "falha": "Produto não encontrado"});
-     }
-
-     const showProducts = Product.find({ id })
-     res.status(200).json({ "sucesso": "Produto na mão"})
-    }
+    res.status(200).json(product);
+  }
 }
 
-module.exports = new ProductsController()
+module.exports = new ProductsController();
