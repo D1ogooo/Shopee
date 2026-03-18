@@ -1,17 +1,20 @@
-import { Container, Section } from "./style";
+import { Container, Card, Title, Form, InputWrapper, SubmitButton, BottomLink, BottomText, LinksRow, DividerLine, Main, Input, TogglePassword, SmallLink, Divider, DividerText, SocialRow, SocialButton } from "./style";
 import { AuthContext } from "../../../contexts/AuthContext.jsx";
-import { useContext } from 'react'
-import { Mail } from 'lucide-react';
-import { KeyRound } from 'lucide-react';
+import { useState, useContext } from 'react'
+import { Eye, EyeOff } from 'lucide-react';
 
 function Signin() {
   const { signin } = useContext(AuthContext);
 
-  async function handleSubmit(e) {
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const res = await signin(email, password)
+      await signin(email, password)
       .then((e) => {
 	   alert(e.message || "Usuário authenticado com sucesso!");
 	   navigate("/");
@@ -20,32 +23,41 @@ function Signin() {
       console.error("Erro ao logar:", err.message);
       alert(err.message);
     }
-  }
+  };
 
   return (
-    <Container>
-      <Section>
-        <form onSubmit={handleSubmit}>
-          <h2>Entrar</h2>
-            Email
-          <label>
-            <span><Mail/></span>
-            <input
+     <Container>
+      <Main>
+        <Card>
+          <Title>Log In</Title>
+          <Form onSubmit={handleSubmit}>
+            <Input
               type="email"
-              placeholder="Seu email..."
+              placeholder="Email/Telefone/Usuário"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-          </label>
-            Senha
-          <label>
-            <span><KeyRound/></span>
-            <input
-              type="password"
-              placeholder="Sua senha..."
-            />
-          </label>
-          <button type="submit">Entrar</button>
-        </form>
-      </Section>
+            <InputWrapper>
+              <Input
+                as="input"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                style={{ paddingRight: 48 }}
+              />
+              <TogglePassword type="button" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </TogglePassword>
+            </InputWrapper>
+            <SubmitButton type="submit">Log In</SubmitButton>
+          </Form>
+
+          <BottomText>
+            Novo na Shopee? <BottomLink to="/register">Cadastre-se</BottomLink>
+          </BottomText>
+        </Card>
+      </Main>
     </Container>
   );
 }

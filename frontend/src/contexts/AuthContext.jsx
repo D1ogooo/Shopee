@@ -39,7 +39,7 @@ function AuthProvider({ children }) {
 
   async function signup(name, email, password) {
     try {
-      const res = await api.post('/users/signup', {
+      await api.post('/users/signup', {
         nome: name,
         email,
         password,
