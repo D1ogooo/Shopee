@@ -10,6 +10,7 @@ export const Container = styled.div`
 export const ProductContent = styled.div`
   display: flex;
   flex-direction: column;
+  font-family: "Roboto";
   gap: 2rem;
   background: #fff;
   padding: 2rem;
@@ -89,6 +90,17 @@ export const Button = styled(Link)`
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
+`
 
- 
+export const ButtonCart = styled.button`
+  display: "flex";
+  gap: 2rem;
+  margin-top: 1rem;
+  padding: 0.8rem;
+  border: solid 1px #d84326;
+  background: #ee4d2d42;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
 `

@@ -26,7 +26,6 @@ export const CardPai = styled.div`
   margin-top: 3rem;
   gap: 1rem;
   flex-wrap: wrap;
-  align-items: center;
 `
 
 export const Card = styled.div`

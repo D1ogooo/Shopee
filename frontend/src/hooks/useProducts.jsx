@@ -21,7 +21,7 @@ function ProductsProvider({ children }) {
           filteredProducts,
           setFilteredProducts,
         }}>
-            {children}
+          {children}
         </ProductsContext.Provider>
     )
 }

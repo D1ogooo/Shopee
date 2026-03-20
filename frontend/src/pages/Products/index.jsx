@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useCart } from "../../hooks/useCart";
 import { CornerDownLeft } from 'lucide-react';
+import CartIcon from '../../assets/f600cbfffbe02cc144a1.svg'
 
 import {
   Container,
@@ -11,13 +13,15 @@ import {
   Price,
   Badge,
   ButtonBuy,
-  Button
+  Button,
+  ButtonCart
 } from "./style";
 import { api } from "../../../api/api";
 
 function Products() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { AddItem } = useCart()
 
   useEffect(() => {
     async function fetchProduct() {
@@ -29,6 +33,10 @@ function Products() {
   }, [id]);
 
   if (!product) return <p>Carregando...</p>;
+
+  function handleAddCart(id, image, titulo, valor) {
+   AddItem(id, image, titulo, valor)
+  }
 
   return (
     <Container>
@@ -44,14 +52,23 @@ function Products() {
 
         <InfoSection>
           {product.indicado && <Badge>Indicado</Badge>}
-
           <Title>{product.titulo}</Title>
-
           <Price>R$ {product.valor}</Price>
-
-          <ButtonBuy>Comprar agora</ButtonBuy>
+          <div style={{ 
+            display: "flex", 
+            gap: "2rem", 
+            alignItems: "center",
+           }}>
+          <ButtonCart onClick={() => handleAddCart(id, image, titulo, valor)}>
+            <img src={CartIcon} alt="" />
+            Adicionar ao carrinho
+          </ButtonCart>
+          <ButtonBuy>
+            Comprar agora
+          </ButtonBuy>
+         </div>
         </InfoSection>
-        </div>
+       </div>
       </ProductContent>
     </Container>
   );

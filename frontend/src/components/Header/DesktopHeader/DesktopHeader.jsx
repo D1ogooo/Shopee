@@ -1,7 +1,7 @@
 import { useState, useMemo, useContext, useEffect } from "react";
 import { useProcuts } from "../../../hooks/useProducts";
 import { useNavigate } from "react-router-dom";
-import { Search, LogOut } from "lucide-react";
+import { Search, LogOut, ShoppingCart } from "lucide-react";
 import { AuthContext } from "../../../contexts/AuthContext";
 import { Input, Button, Header, Container } from './style'
 import shopeeImage from '../../../assets/d5b7d915138b4b295aea0ed459bc2a4e.jpg'
@@ -26,7 +26,8 @@ export function DesktopHeader() {
   useEffect(() => {
     setFilteredProducts(filteredProducts)
   }, [filteredProducts, setFilteredProducts])
-
+  
+  function handdleAddItem() {}
 
   return (
     <>
@@ -43,6 +44,9 @@ export function DesktopHeader() {
               onChange={(e) => setBusca(e.target.value)}
             />
             <div style={{ display: "flex" }}>
+              <Button onClick={handdleAddItem()}>
+                <ShoppingCart color={"#fff"} size={20} />
+              </Button>
               <Button onClick={handleLoggout}>
                 <LogOut color={"#fff"} size={20} />
               </Button>
