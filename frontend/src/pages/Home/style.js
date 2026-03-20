@@ -4,6 +4,7 @@ import styled from 'styled-components'
 export const Container = styled.div`
 //  width: 90%;
  margin: 0 auto;
+ margin-bottom: 10rem;
 `
 
 export const Title = styled.h2`
@@ -12,7 +13,7 @@ export const Title = styled.h2`
  height: 30px;
  color: #000;
  margin: 0 auto;
- margin-top: 10rem;
+ margin-top: 5rem;
 
  span {
   color: red;
@@ -25,6 +26,7 @@ export const CardPai = styled.div`
   margin-top: 3rem;
   gap: 1rem;
   flex-wrap: wrap;
+  align-items: center;
 `
 
 export const Card = styled.div`

@@ -5,7 +5,7 @@ const Product = require("../model/productsModel");
 class ProductsController {
 
   async create(req, res) {
-    const { image, titulo, conteudo, valor } = req.body;
+    const { image, titulo, valor, indicado } = req.body;
 
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -14,14 +14,18 @@ class ProductsController {
       return res.status(401).json({ message: 'Não autorizado' });
     }
 
+    if(!image, !titulo, !valor) {   
+     throw new Error("Algum dado vindo do frontend está faltando")
+    }
+
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
     const newProduct = new Product({
       image,
       titulo,
-      conteudo,
       valor,
-      user: decoded.id
+      indicado
+      // user: decoded.id
     });
 
     await newProduct.save();

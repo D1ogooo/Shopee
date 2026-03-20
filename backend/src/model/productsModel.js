@@ -9,23 +9,25 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  conteudo: {
-    type: String,
-    required: true,
-  },
   valor: {
     type: String,
     required: true,
   },
+  indicado: {
+    type: Boolean,
+    default: false
+  },
+  
+  // user: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: true,
+  // },
+  
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  }
 });
 
 const Product = mongoose.model('Product', ProductSchema);

@@ -1,23 +1,24 @@
+import { useProcuts } from "../../hooks/useProducts"
 import { Header } from "../../components/Header"
 import { FooterComponent } from '../../components/Footer'
 import { data } from "../../data/a"
 import { ButtonProduct,Card, CardPai, Container, Title } from "./style"
 
 function Home() {
-    // api.get('/')
+    const { filteredProducts } = useProcuts()
 
     return (
       <>
-       <Header />
          <Container>
            <Title>Acesse nossos <span>produtos</span></Title>
             <CardPai>
-            {data.map((e) => (
-             <Card key={e.id}>
-             <img src={e.img} alt="" />
-             <h3>{e.indicacao && <span>{e.indicacao}</span>}{e.name}</h3>
-             <p>{e.valor}</p>
-             <ButtonProduct to={`/product/${e.id}`}>
+            {filteredProducts.map((e) => (
+             <Card key={e._id}>
+           
+             <img src={e.image} alt="" />
+             <h3>{e.indicado && <span>indicado</span>}{e.titulo}</h3>
+             <p>R$ {e.valor}</p>
+             <ButtonProduct to={`/product/${e._id}`}>
               Visualizar
              </ButtonProduct>
              </Card>
