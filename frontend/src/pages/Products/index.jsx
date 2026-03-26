@@ -34,8 +34,8 @@ function Products() {
 
   if (!product) return <p>Carregando...</p>;
 
-  function handleAddCart(id, image, titulo, valor) {
-   AddItem(id, image, titulo, valor)
+  function handleAddCart() {
+    AddItem({id: product._id, image: product.image, titulo: product.titulo, valor: product.valor, quantity: product.quantity})
   }
 
   return (
@@ -59,7 +59,7 @@ function Products() {
             gap: "2rem", 
             alignItems: "center",
            }}>
-          <ButtonCart onClick={() => handleAddCart(id, image, titulo, valor)}>
+          <ButtonCart onClick={() => handleAddCart()}>
             <img src={CartIcon} alt="" />
             Adicionar ao carrinho
           </ButtonCart>
